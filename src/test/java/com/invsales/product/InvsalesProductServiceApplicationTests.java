@@ -4,11 +4,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-@SpringBootTest
+@SpringBootTest(classes = InvsalesProductServiceApplication.class)
 @ActiveProfiles("test")
 class InvsalesProductServiceApplicationTests {
 
     @Test
     void contextLoads() {
+        // This test verifies that the Spring context loads successfully.
     }
 }
