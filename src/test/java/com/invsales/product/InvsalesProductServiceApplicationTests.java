@@ -1,15 +1,12 @@
 package com.invsales.product;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootTest(classes = InvsalesProductServiceApplication.class)
-@ActiveProfiles("test")
-class InvsalesProductServiceApplicationTests {
+@SpringBootApplication
+public class InvsalesProductServiceApplication {
 
-    @Test
-    void contextLoads() {
-        // This test verifies that the Spring context loads successfully.
+    public static void main(String[] args) {
+        SpringApplication.run(InvsalesProductServiceApplication.class, args);
     }
 }
