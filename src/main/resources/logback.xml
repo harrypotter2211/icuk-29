@@ -1,22 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <appender name="STDOUT"
-        class="ch.qos.logback.core.ConsoleAppender">
+
+    <!-- Console Appender -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
+
+    <!-- File Appender -->
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>/product.log</file>
+        <file>logs/product.log</file> <!-- Relative path to avoid permission issues -->
+        <append>true</append> <!-- Continue appending to the file -->
         <encoder>
-            <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n </pattern>
+            <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
         </encoder>
     </appender>
+
+    <!-- Logger for your package -->
     <logger name="com.invsales.product" level="DEBUG" additivity="true">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
     </logger>
+
+    <!-- Root Logger -->
     <root level="INFO">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
     </root>
+
 </configuration>
