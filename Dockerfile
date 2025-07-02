@@ -2,28 +2,28 @@
 FROM maven:3.8.6-openjdk-17 AS build
 WORKDIR /app
 
-# Copy pom.xml and download dependencies first (cache efficiency)
+# Copy pom.xml and download dependencies (build cache optimization)
 COPY pom.xml .
 RUN mvn dependency:go-offline
 
-# Copy full project
+# Copy source files
 COPY src ./src
 
-# Run tests with `test` profile using H2 and then package the app
+# Run tests using the 'test' profile (uses H2 to avoid real DB)
 RUN mvn clean verify -Dspring.profiles.active=test
 
 # === RUNTIME STAGE ===
 FROM openjdk:17-jdk-slim
 WORKDIR /app
 
-# Create logs directory for Logback file logging
+# Create log directory for Logback file output
 RUN mkdir -p logs
 
-# Copy JAR from the build stage
+# Copy built JAR from build stage
 COPY --from=build /app/target/*.jar app.jar
 
-# Expose Spring Boot app port
+# Expose Spring Boot default port
 EXPOSE 8080
 
-# Launch the application
+# Run the app
 ENTRYPOINT ["java", "-jar", "app.jar"]
