@@ -7,8 +7,5 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-    show-sql: false
     database-platform: org.hibernate.dialect.H2Dialect
-  sql:
-    init:
-      mode: never
+    show-sql: false
